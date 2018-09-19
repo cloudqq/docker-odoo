@@ -40,7 +40,6 @@ wsgiref==0.1.2
 XlsxWriter==0.9.3
 xlwt==1.1.2
 xlrd==1.0.0
-psycogreen==1.0
 Wand==0.4.4
 pycrypto==2.6.1
 OdooRPC==0.6.1
