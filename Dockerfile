@@ -7,6 +7,9 @@ RUN set -x; \
         && apt-get install -y --no-install-recommends \
             ca-certificates \
             curl \
+            ttf-wqy-zenhei \
+            ttf-wqy-microhei \
+            libmagickwand-dev \
             node-less \
             python-gevent \
             python-pip \
