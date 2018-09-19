@@ -23,6 +23,7 @@ RUN set -x; \
 COPY ./odoo /opt/
 COPY ./requirements.txt /opt/odoo
 
+
 RUN useradd -ms /bin/bash odoo
 RUN chown -R odoo:odoo /opt/odoo
 
