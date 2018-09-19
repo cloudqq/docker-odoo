@@ -18,19 +18,28 @@ RUN set -x; \
         && dpkg --force-depends -i wkhtmltox.deb \
         && apt-get -y install -f --no-install-recommends \
         && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false npm \
-        && rm -rf /var/lib/apt/lists/* wkhtmltox.deb \
-        && pip install psycogreen==1.0
+        && rm -rf /var/lib/apt/lists/* wkhtmltox.deb 
+
+COPY ./odoo /opt/
+COPY ./requirements.txt /opt/odoo
+
+RUN useradd -ms /bin/bash odoo
+RUN chown -R odoo:odoo /opt/odoo
+
+WORKDIR /opt/odoo
+
+RUN pip install -r /opt/odoo/requirements.txt
 
 # Install Odoo
-ENV ODOO_VERSION 10.0
-ENV ODOO_RELEASE 20180808
-RUN set -x; \
-        curl -o odoo.deb -SL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/odoo_${ODOO_VERSION}.${ODOO_RELEASE}_all.deb \
-        && echo '98736953010be3c578f4b9eb1c7e2c87da93a7bd odoo.deb' | sha1sum -c - \
-        && dpkg --force-depends -i odoo.deb \
-        && apt-get update \
-        && apt-get -y install -f --no-install-recommends \
-        && rm -rf /var/lib/apt/lists/* odoo.deb
+# ENV ODOO_VERSION 10.0
+# ENV ODOO_RELEASE 20180808
+# RUN set -x; \
+#         curl -o odoo.deb -SL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/odoo_${ODOO_VERSION}.${ODOO_RELEASE}_all.deb \
+#         && echo '98736953010be3c578f4b9eb1c7e2c87da93a7bd odoo.deb' | sha1sum -c - \
+#         && dpkg --force-depends -i odoo.deb \
+#         && apt-get update \
+#         && apt-get -y install -f --no-install-recommends \
+#         && rm -rf /var/lib/apt/lists/* odoo.deb
 
 # Copy entrypoint script and Odoo configuration file
 COPY ./entrypoint.sh /
