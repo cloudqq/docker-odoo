@@ -10,6 +10,7 @@ RUN set -x; \
             ttf-wqy-zenhei \
             ttf-wqy-microhei \
             libmagickwand-dev \
+            python-setuptools \
             node-less \
             python-gevent \
             python-pip \
