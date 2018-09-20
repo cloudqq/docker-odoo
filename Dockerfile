@@ -14,7 +14,6 @@ RUN set -x; \
             python-gevent \
             python-pip \
             python-renderpm \
-            python-support \
             python-watchdog \
             libevent-dev \
             python-dev \
